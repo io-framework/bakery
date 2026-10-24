@@ -1,0 +1,10 @@
+parameters:
+    level: 10
+    paths:
+        - app.php
+        - index.php
+        - src
+        - tests
+    excludePaths:
+        # live templates: vendor/bin/io-check checks them, with the views
+        - src/Components/*.Template.php

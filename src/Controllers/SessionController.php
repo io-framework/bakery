@@ -1,0 +1,61 @@
+<?php
+
+namespace Bakery\Controllers;
+
+use Bakery\Repositories\Users;
+use Bakery\Requests\LoginForm;
+use Io\Attributes\{Body, Controller, Get, Inject, Layout, Post};
+use Io\Flash\Flash;
+use Io\Http\{Redirect, Response, View};
+use Io\I18n\Translator;
+use Io\JWT;
+
+/** Signing in to the back office: a classic form post, a JWT in an HttpOnly cookie, a flash message. */
+#[Controller('/backoffice')]
+#[Layout('_Backoffice.php')]
+final class SessionController
+{
+    #[Inject]
+    private Users $users;
+
+    #[Inject]
+    private Flash $flash;
+
+    #[Inject]
+    private Translator $translator;
+
+    #[Get('/login')]
+    public function form(): View
+    {
+        return new View('Backoffice/Login', new LoginForm());
+    }
+
+    /** A View with the form while it is invalid answers 422. */
+    #[Post('/login')]
+    public function login(
+        #[Body(
+            validate: false
+        )]
+        LoginForm $form,
+        Response $res,
+    ): View|Redirect {
+        $user = $form->isValid ? $this->users->verify($form->email, $form->password) : null;
+        if ($user === null) {
+            if ($form->isValid) {
+                $form->fail('password', $this->translator->t('Wrong email or password.'));
+            }
+            return new View('Backoffice/Login', $form);
+        }
+        JWT::signIn($res, $user);
+        $this->flash->success($this->translator->t('Welcome, {name}.', ['name' => $user['name']]));
+        return new Redirect('/backoffice', 303);
+    }
+
+    #[Post('/logout')]
+    public function logout(Response $res): Redirect
+    {
+        JWT::signOut($res);
+        $this->flash->info($this->translator->t('You are signed out.'));
+        return new Redirect('/backoffice/login', 303);
+    }
+}

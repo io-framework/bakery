@@ -1,0 +1,15 @@
+@import "tailwindcss";
+@source "../views";
+@source "../src";
+
+/* Flash messages sit above the page, in the bakery's colours */
+body .io-flashes { position: fixed; top: 1rem; right: 1rem; z-index: 10; width: min(380px, calc(100vw - 2rem)); }
+.io-flashes .io-flash { margin: 0 0 0.5rem; box-shadow: 0 4px 12px rgb(0 0 0 / 0.12); }
+
+/* A live component that failed: its last good HTML stays, outlined */
+[data-live-error] { outline: 2px solid var(--color-red-500); outline-offset: 4px; border-radius: 0.5rem; }
+
+.io-sheet { @apply w-full text-left text-sm; }
+.io-sheet th, .io-sheet td { @apply border-b border-stone-200 px-2 py-1.5; }
+.io-sheet caption { @apply mb-2 text-left font-semibold; }
+.io-sheet td.io-sheet-num { @apply text-right tabular-nums; }
