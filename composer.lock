@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4bc6cf9fe21171bc83694b3e308a9b5c",
+    "content-hash": "0289c86fcadb1ae1e4000ad507f9d67d",
     "packages": [
         {
             "name": "io/charts",
@@ -214,16 +214,16 @@
         },
         {
             "name": "io/i18n",
-            "version": "v0.1.0",
+            "version": "v0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/io-framework/i18n.git",
-                "reference": "cef050040ea4955aacd5632421f82cfdf7e89460"
+                "reference": "94e56daf3bd671dadbeca2a3da82ef36db54ac55"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/io-framework/i18n/zipball/cef050040ea4955aacd5632421f82cfdf7e89460",
-                "reference": "cef050040ea4955aacd5632421f82cfdf7e89460",
+                "url": "https://api.github.com/repos/io-framework/i18n/zipball/94e56daf3bd671dadbeca2a3da82ef36db54ac55",
+                "reference": "94e56daf3bd671dadbeca2a3da82ef36db54ac55",
                 "shasum": ""
             },
             "require": {
@@ -248,9 +248,9 @@
             "description": "Translations and per-request locale for Io: catalogs, {placeholder} and plural messages, $this->t() in views, translated validation errors.",
             "support": {
                 "issues": "https://github.com/io-framework/i18n/issues",
-                "source": "https://github.com/io-framework/i18n/tree/v0.1.0"
+                "source": "https://github.com/io-framework/i18n/tree/v0.1.1"
             },
-            "time": "2026-10-24T16:23:52+00:00"
+            "time": "2026-10-27T09:41:50+00:00"
         },
         {
             "name": "io/live",

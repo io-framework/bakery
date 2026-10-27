@@ -9,7 +9,7 @@
         "io/charts": "^0.1.0",
         "io/export": "^0.1.0",
         "io/flash": "^0.1.0",
-        "io/i18n": "^0.1.0",
+        "io/i18n": "^0.1.1",
         "io/live": "^0.1.0"
     },
     "require-dev": {
