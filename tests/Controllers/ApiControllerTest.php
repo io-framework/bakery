@@ -37,7 +37,7 @@ final class ApiControllerTest extends AppTestCase
 
         $this->request('PATCH', "/v1/orders/{$order->code}")->withJwt(['sub' => 2, 'role' => 'staff'])->withJson(['status' => 'ready'])->send()
             ->assertStatus(422)
-            ->assertJsonPath('errors.status', 'The order is received; its next step is baking.');
+            ->assertJsonPath('errors.status.0', 'The order is received; its next step is baking.');
         $this->request('PATCH', "/v1/orders/{$order->code}")->withJwt(['sub' => 2, 'role' => 'staff'])->withJson(['status' => 'baking'])->send()
             ->assertOk()
             ->assertJsonPath('status', 'baking')

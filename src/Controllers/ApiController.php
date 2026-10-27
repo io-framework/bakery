@@ -92,7 +92,7 @@ final class ApiController
         $order = $this->find($code);
         if ($order->status->next() !== $change->status || !$this->orders->advance($order->id, $order->status)) {
             $now = $this->find($code)->status;   // read again: another click may have moved it in the meantime
-            throw new ValidationException(errors: ['status' => "The order is {$now->value}; its next step is " . ($now->next()->value ?? 'none') . '.']);
+            throw new ValidationException(errors: ['status' => ["The order is {$now->value}; its next step is " . ($now->next()->value ?? 'none') . '.']]);
         }
         $this->broadcast->changed();
         return OrderSummary::of($this->find($code));

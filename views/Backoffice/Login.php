@@ -16,16 +16,16 @@
     <label class="grid gap-1">
         <span class="text-sm font-medium">{{ $this->t('Email') }}</span>
         <input type="email" name="email" value="{{ $model->email }}" required autocomplete="username" class="rounded-lg border border-stone-300 px-3 py-2">
-        @if (isset($errors['email']))
-            <span class="text-sm text-red-700">{{ $errors['email'] }}</span>
-        @endif
+        @foreach ($errors['email'] ?? [] as $message)
+            <span class="text-sm text-red-700">{{ $message }}</span>
+        @endforeach
     </label>
     <label class="grid gap-1">
         <span class="text-sm font-medium">{{ $this->t('Password') }}</span>
         <input type="password" name="password" required autocomplete="current-password" class="rounded-lg border border-stone-300 px-3 py-2">
-        @if (isset($errors['password']))
-            <span class="text-sm text-red-700">{{ $errors['password'] }}</span>
-        @endif
+        @foreach ($errors['password'] ?? [] as $message)
+            <span class="text-sm text-red-700">{{ $message }}</span>
+        @endforeach
     </label>
     <button class="rounded-lg bg-stone-900 px-4 py-2 font-semibold text-white">{{ $this->t('Sign in') }}</button>
     <p class="text-sm text-stone-500">

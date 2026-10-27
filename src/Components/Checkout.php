@@ -37,7 +37,7 @@ final class Checkout
 
     private CheckoutForm $form;
 
-    /** @var array<string, string> field => message */
+    /** @var array<string, list<string>> field => messages */
     private array $errors = [];
 
     public function __construct()
@@ -50,10 +50,10 @@ final class Checkout
         $this->form = $form;
         $this->errors = $form->errors;
         if ($this->cart->count() === 0) {
-            $this->errors['cart'] = $this->i18n->t('Your cart is empty.');
+            $this->errors['cart'][] = $this->i18n->t('Your cart is empty.');
         }
         if (!isset($this->errors['pickupDate']) && !in_array($form->pickupDate, $this->calendar->upcoming(), true)) {
-            $this->errors['pickupDate'] = $this->i18n->t('Please choose one of the pickup days.');
+            $this->errors['pickupDate'][] = $this->i18n->t('Please choose one of the pickup days.');
         }
         if ($this->errors !== []) {
             return;
@@ -61,7 +61,7 @@ final class Checkout
         try {
             $order = $this->orders->place($this->cart->quantities(), trim($form->name), trim($form->email), $form->pickupDate, $this->i18n->locale());
         } catch (OutOfStock $e) {
-            $this->errors['cart'] = $this->i18n->t('Sorry, we do not have that many of {product} any more.', ['product' => $e->product]);
+            $this->errors['cart'] = [$this->i18n->t('Sorry, we do not have that many of {product} any more.', ['product' => $e->product])];
             return;
         }
         $this->cart->clear();
